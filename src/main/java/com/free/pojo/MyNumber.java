@@ -150,9 +150,9 @@ public class MyNumber {
     }
 
     /**
-     * 功能描述: <br>
+     * 功能描述: <br>减法
      * 〈〉
-     * @Param: [right]减法
+     * @Param: [right]
      * @Return: com.free.pojo.MyNumber
      * @Author: Free
      * @Date: 2020/10/9 21:22

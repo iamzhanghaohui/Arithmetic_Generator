@@ -93,6 +93,7 @@ public class Expression {
         parent.high = Math.max(parent.left.high, parent.right.high) + 1;
         return parent;
     }
+
     /**
      * 功能描述: <br>进行两个元素的计算
      * 〈〉

@@ -13,6 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * @Version V1.0
  **/
 public class Creator {
+
     /**
      * 功能描述: <br>获得范围内的随机整数
      * 〈〉
@@ -25,7 +26,13 @@ public class Creator {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         return random.nextInt(range);
     }
-    //生成题目和答案的映射关系
+
+    /**
+     * 生成题目和答案的映射关系
+     * @param examNumber
+     * @param answerRange
+     * @return
+     */
     public static HashMap<String, String> generateMap(int examNumber, int answerRange) {
         if (examNumber < 1) {
             throw new RuntimeException("生成题目的个数必须大于0");

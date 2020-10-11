@@ -71,7 +71,7 @@ public class Check {
     public static void compareAndOutput( Map<Integer, String> exerciseMap , Map<Integer, String> answerMap )throws IOException{
         //对比的结果
         List<Integer> rightRsult=new LinkedList<>();
-        List<Integer>  errorRsult=new LinkedList<>();
+        List<Integer> errorRsult=new LinkedList<>();
         //比较答案
         for (int i = 1; i <= answerMap.size(); i++){
             if(exerciseMap.containsKey(i)){
@@ -88,13 +88,19 @@ public class Check {
         PrintWriter printWriter = new PrintWriter(fileWriter);
         printWriter.println(" ");
         printWriter.print("Correct:正确题数："+rightRsult.size()+"(");
-        for (int str: rightRsult) {
-            printWriter.print(str+",");
+        for (int i=0;i<rightRsult.size();i++){
+            printWriter.print(rightRsult.get(i));
+            if(i!= rightRsult.size()-1){
+                printWriter.print(",");
+            }
         }
         printWriter.println(")");
         printWriter.print("Wrong:错误题数："+errorRsult.size()+"(");
-        for (int str: errorRsult) {
-            printWriter.print(str+",");
+        for (int i=0;i<errorRsult.size();i++){
+            printWriter.print(errorRsult.get(i));
+            if(i!= errorRsult.size()-1){
+                printWriter.print(",");
+            }
         }
         printWriter.print(")");
         printWriter.flush();

@@ -1,5 +1,6 @@
 package com.free;
 
+import com.free.pojo.Check;
 import com.free.pojo.Creator;
 import com.free.util.FileUtils;
 
@@ -63,7 +64,7 @@ public class MainStart {
             }
             File answerFile=new File(answerFileName);
             File exerciseFile=new File(execiseFileName);
-            FileUtils.compare(answerFile,exerciseFile);
+            Check.checkAnswer(answerFile,exerciseFile);
         }
 
         else {

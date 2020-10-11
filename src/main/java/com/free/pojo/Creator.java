@@ -1,4 +1,4 @@
-package com.free.util;
+package com.free.pojo;
 
 import com.free.pojo.Expression;
 
@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * @ClassNameGenerateUtils
+ * @ClassNameCreator
  * @Description
  * @Author Free
  * @Date2020/10/9 21:14
  * @Version V1.0
  **/
-public class GenerateUtils {
+public class Creator {
     /**
      * 功能描述: <br>获得范围内的随机整数
      * 〈〉
@@ -26,25 +26,26 @@ public class GenerateUtils {
         return random.nextInt(range);
     }
     //生成题目和答案的映射关系
-    public static HashMap<String, String> generateMap(int exam_number, int answer_range) {
-        if (exam_number < 1) {
+    public static HashMap<String, String> generateMap(int examNumber, int answerRange) {
+        if (examNumber < 1) {
             throw new RuntimeException("生成题目的个数必须大于0");
         }
-        if (answer_range < 1) {
+        if (answerRange < 1) {
             throw new RuntimeException("运算结果范围必须大于等于1");
         }
-        HashMap<String, String> hashMap = new HashMap<>();
+        HashMap<String, String> resMap = new HashMap<>();
 
-        for (int i = 1; hashMap.size() < exam_number; ) {
+        for (int i = 1; resMap.size() < examNumber; ) {
             //因为在运算的过程中会出现n÷0的情况，这时候就会抛异常
-            Expression expression = new Expression(3, answer_range);
-            if ((hashMap.get(expression.toString()) != null || !"".equals(expression.toString()))
-                    &&
-                    !expression.isDivideForZero()) {
-                hashMap.put(expression.toString(), expression.getRoot().result.toString());
+            Expression expression = new Expression(3, answerRange);
+
+            Boolean tempFlag =(resMap.get(expression.toString()) != null || !"".equals(expression.toString()))
+                    && ( !expression.isDivideZero());
+            if (tempFlag) {
+                resMap.put(expression.toString(), expression.getRoot().result.toString());
                 i++;
             }
         }
-        return hashMap;
+        return resMap;
     }
 }

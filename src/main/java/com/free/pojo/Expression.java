@@ -1,6 +1,5 @@
 package com.free.pojo;
 
-import com.free.util.GenerateUtils;
 import lombok.Data;
 
 /**
@@ -14,7 +13,7 @@ import lombok.Data;
 @Data
 public class Expression {
 
-    private static final String ADD = "＋";
+    private static final String ADDITION = "＋";
 
     private static final String SUBTRACT = "-";
 
@@ -27,20 +26,20 @@ public class Expression {
     private static final String RIGHT_BRACKETS = ")";
 
     //运算符的种类
-    private static final String[] OPERATORS = {ADD, SUBTRACT, MULTIPLY, DIVIDE};
+    private static final String[] OPERATORS = {ADDITION, SUBTRACT, MULTIPLY, DIVIDE};
 
     //根节点
     private Node root;
 
     //出现n除以0的情况
-    private boolean isDivideForZero = false;
+    private boolean isDivideZero = false;
     //生成答案的范围
     public static int range;
 
     /**
      * 功能描述: <br>生成表达式
      * 〈〉
-     * @Param: [operator_number 运算符个数, answer_range 运算结果范围]
+     * @Param: [operatorNum 运算符个数, answerRange 运算结果范围]
      * @Author: Free
      * @Date: 2020/10/9 21:31
      */
@@ -56,7 +55,7 @@ public class Expression {
         if (operatorNum == 1) {
             root = generateNode(operatorNum);
         } else {
-            root = generateNode(GenerateUtils.getRandomInRange(operatorNum) + 1);
+            root = generateNode(Creator.getRandomInRange(operatorNum) + 1);
         }
     }
     /**
@@ -70,19 +69,19 @@ public class Expression {
     public Node generateNode(int number) {
         //如果是0就构造叶子节点
         if (number == 0) {
-            return new Node(Fraction.generateFraction(), null, null, 1);
+            return new Node(MyNumber.generateMyNumber(), null, null, 1);
         }
         //其他都是构造符号节点
         //随机选一种运算符号
-        OperatorNode parent = new OperatorNode(null, null, OPERATORS[GenerateUtils.getRandomInRange(4)]);
-        int left = GenerateUtils.getRandomInRange(number);
+        Onode parent = new Onode(null, null, OPERATORS[Creator.getRandomInRange(4)]);
+        int left = Creator.getRandomInRange(number);
         //递归下去构造左孩子和右孩子
         parent.left = generateNode(left);
         //总数要减去当前已经构建出来的这一个节点
         parent.right = generateNode(number - 1 - left);
 
         //然后计算结果
-        Fraction result = calculate(parent.operator, parent.left.result, parent.right.result);
+        MyNumber result = calculate(parent.operator, parent.left.result, parent.right.result);
         //如果是负数,就是出现小的减去大的情况，这时候交换左右孩子
         if (result.isNegative()) {
             Node tmp = parent.left;
@@ -97,26 +96,26 @@ public class Expression {
     /**
      * 功能描述: <br>进行两个元素的计算
      * 〈〉
-     * @Param: [operator, leftFraction, rightFraction]
-     * @Return: com.free.pojo.Fraction
+     * @Param: [operator, leftMyNumber, rightMyNumber]
+     * @Return: com.free.pojo.MyNumber
      * @Author: Free
      * @Date: 2020/10/9 21:52
      */
-    private Fraction calculate(String operator, Fraction leftFraction, Fraction rightFraction) {
+    private MyNumber calculate(String operator, MyNumber leftMyNumber, MyNumber rightMyNumber) {
         switch (operator) {
-            case ADD:
-                return leftFraction.add(rightFraction);
+            case ADDITION:
+                return leftMyNumber.add(rightMyNumber);
             case SUBTRACT:
-                return leftFraction.subtract(rightFraction);
+                return leftMyNumber.subtract(rightMyNumber);
             case MULTIPLY:
-                return leftFraction.multiply(rightFraction);
-            //可能会出现除以0的情况，即rightFraction可能为0
+                return leftMyNumber.multiply(rightMyNumber);
+            //可能会出现除以0的情况，即rightMyNumber可能为0
             case DIVIDE:
-                if (rightFraction.getUp() == 0) {
-                    this.isDivideForZero = true;
-                    rightFraction.setUp(1);
+                if (rightMyNumber.getUp() == 0) {
+                    this.isDivideZero = true;
+                    rightMyNumber.setUp(1);
                 }
-                return leftFraction.divide(rightFraction);
+                return leftMyNumber.divide(rightMyNumber);
             default:
                 throw new RuntimeException("该操作符不存在");
         }
@@ -144,14 +143,14 @@ public class Expression {
         String left = print(localRootNode.left);
         String mid = localRootNode.toString();
         //需要加括号的情况,一个节点的操作符为乘除，其子节点的操作符是加减
-        if (localRootNode.left instanceof OperatorNode && localRootNode instanceof OperatorNode) {
-            if (leftBrackets(((OperatorNode) localRootNode.left).operator, ((OperatorNode) localRootNode).operator)) {
+        if (localRootNode.left instanceof Onode && localRootNode instanceof Onode) {
+            if (leftBrackets(((Onode) localRootNode.left).operator, ((Onode) localRootNode).operator)) {
                 left = LEFT_BRACKETS + " " + left + " " + RIGHT_BRACKETS;
             }
         }
         String right = print(localRootNode.right);
-        if (localRootNode.right instanceof OperatorNode && localRootNode instanceof OperatorNode) {
-            if (rightBrackets(((OperatorNode) localRootNode.right).operator, ((OperatorNode) localRootNode).operator)) {
+        if (localRootNode.right instanceof Onode && localRootNode instanceof Onode) {
+            if (rightBrackets(((Onode) localRootNode.right).operator, ((Onode) localRootNode).operator)) {
                 right = LEFT_BRACKETS + " " + right + " " + RIGHT_BRACKETS;
             }
         }
@@ -191,7 +190,7 @@ public class Expression {
      * @Date: 2020/10/9 22:48
      */
     private boolean isAddOrSubtract(String operator) {
-        return operator.equals(ADD) || operator.equals(SUBTRACT);
+        return operator.equals(ADDITION) || operator.equals(SUBTRACT);
     }
 
     /**

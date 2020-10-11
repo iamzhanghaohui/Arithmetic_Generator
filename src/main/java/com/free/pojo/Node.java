@@ -9,7 +9,7 @@ package com.free.pojo;
  **/
 public class Node {
     //存储当前节点以下的计算结果
-    public Fraction result;
+    public MyNumber result;
     public Node left;
     public Node right;
     public int high;
@@ -17,7 +17,7 @@ public class Node {
     public Node() {
     }
 
-    public Node(Fraction result, Node left, Node right, int high) {
+    public Node(MyNumber result, Node left, Node right, int high) {
         this.result = result;
         this.left = left;
         this.right = right;
@@ -30,7 +30,14 @@ public class Node {
         return result.toString();
     }
 
-
+    /**
+     * 功能描述: <br> 重写equals方法，结点的值
+     * 〈〉
+     * @Param: [o]
+     * @Return: boolean
+     * @Author: Free
+     * @Date: 2020/10/10 16:47
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -38,7 +45,6 @@ public class Node {
         if (o == null || getClass() != o.getClass()) return false;
 
         Node node = (Node) o;
-
         if (result != null ? !result.equals(node.result) : node.result != null)
             return false;
         if (right != null ? !right.equals(node.right) : node.right != null)
@@ -50,8 +56,8 @@ public class Node {
     @Override
     public int hashCode() {
         int result1 = result != null ? result.hashCode() : 0;
-        result1 = 31 * result1 + (right != null ? right.hashCode() : 0);
-        result1 = 31 * result1 + (left != null ? left.hashCode() : 0);
+        result1 = 3001 * result1 + (right != null ? right.hashCode() : 0);
+        result1 = 3001 * result1 + (left != null ? left.hashCode() : 0);
         return result1;
     }
 

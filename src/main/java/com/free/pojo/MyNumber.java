@@ -1,17 +1,16 @@
 package com.free.pojo;
 
-import com.free.util.GenerateUtils;
 import lombok.Data;
 
 /**
- * @ClassNameFraction
+ * @ClassName MyNumber
  * @Description 计算数
  * @Author Free
  * @Date2020/10/9 20:22
  * @Version V1.0
  **/
 @Data
-public class Fraction {
+public class MyNumber {
     /**
      * 分子
      */
@@ -21,8 +20,8 @@ public class Fraction {
      */
     private int down = 1;
     //设置分子和分母
-    public Fraction(int a, int b) {
-        setFraction(a, b);
+    public MyNumber(int a, int b) {
+        setMyNumber(a, b);
     }
     //看当前分数是否为负数
     boolean isNegative() {
@@ -38,7 +37,7 @@ public class Fraction {
      * @param up
      * @param down
      */
-    public void setFraction(int up,int down){
+    public void setMyNumber(int up,int down){
         if (down == 0){
             throw new RuntimeException("分母不能为0");
         }
@@ -85,7 +84,7 @@ public class Fraction {
      * @Author: Free
      * @Date: 2020/10/9 21:19
      */
-    public Fraction(String result) {
+    public MyNumber(String result) {
         result.trim();
         int up_index = result.indexOf("/");
         int a1_index = result.indexOf("'");
@@ -109,26 +108,26 @@ public class Fraction {
                 up = a1 * down + a0;
             }
         }
-        setFraction(up, down);
+        setMyNumber(up, down);
     }
 
    /**
     * 功能描述: 随机生成一个用来运算的分数（多种形式）
     *
     * @Param: []
-    * @Return: com.free.pojo.Fraction
+    * @Return: com.free.pojo.MyNumber
     * @Author: Free
     * @Date: 2020/10/9 21:16
     */
-    public static Fraction generateFraction() {
+    public static MyNumber generateMyNumber() {
         //a.b 都是大于等于0的
-        int up = GenerateUtils.getRandomInRange(Expression.range);
-        int down = GenerateUtils.getRandomInRange(Expression.range);
+        int up = Creator.getRandomInRange(Expression.range);
+        int down = Creator.getRandomInRange(Expression.range);
         //分母为0
         while (down == 0) {
-            down = GenerateUtils.getRandomInRange(Expression.range);
+            down = Creator.getRandomInRange(Expression.range);
         }
-        Fraction result = new Fraction(up,down);
+        MyNumber result = new MyNumber(up,down);
         return result;
     }
 
@@ -138,13 +137,13 @@ public class Fraction {
      * 功能描述: <br>加法
      * 〈〉
      * @Param: [right]
-     * @Return: com.free.pojo.Fraction
+     * @Return: com.free.pojo.MyNumber
      * @Author: Free
      * @Date: 2020/10/9 21:22
      */
-    public Fraction add(Fraction right) {
+    public MyNumber add(MyNumber right) {
         // a/b+c/d =（ad+bc）/bd
-        return new Fraction(
+        return new MyNumber(
                 this.up * right.down + this.down * right.up,
                 this.down * right.down
         );
@@ -154,13 +153,13 @@ public class Fraction {
      * 功能描述: <br>
      * 〈〉
      * @Param: [right]减法
-     * @Return: com.free.pojo.Fraction
+     * @Return: com.free.pojo.MyNumber
      * @Author: Free
      * @Date: 2020/10/9 21:22
      */
-    public Fraction subtract(Fraction right) {
+    public MyNumber subtract(MyNumber right) {
         // a/b-c/d =（ad-bc）/bd
-        return new Fraction(
+        return new MyNumber(
                 this.up * right.down - this.down * right.up,
                 this.down * right.down
         );
@@ -170,13 +169,13 @@ public class Fraction {
      * 功能描述: <br>乘法
      * 〈〉
      * @Param: [right]
-     * @Return: com.free.pojo.Fraction
+     * @Return: com.free.pojo.MyNumber
      * @Author: Free
      * @Date: 2020/10/9 21:22
      */
-    public Fraction multiply(Fraction right) {
+    public MyNumber multiply(MyNumber right) {
         // a/b * c/d = ac / bd
-        return new Fraction(
+        return new MyNumber(
                 this.up * right.up,
                 this.down * right.down
         );
@@ -186,13 +185,13 @@ public class Fraction {
      * 功能描述: <br>除法
      * 〈〉
      * @Param: [right]
-     * @Return: com.free.pojo.Fraction
+     * @Return: com.free.pojo.MyNumber
      * @Author: Free
      * @Date: 2020/10/9 21:22
      */
-    public Fraction divide(Fraction right) {
+    public MyNumber divide(MyNumber right) {
         // a/b  /  c/d = ad / bc
-        return new Fraction(
+        return new MyNumber(
                 this.up * right.down,
                 this.down * right.up
         );
@@ -225,7 +224,7 @@ public class Fraction {
         }
         if (o == null || getClass() != o.getClass()) return false;
 
-        Fraction fraction = (Fraction) o;
+        MyNumber fraction = (MyNumber) o;
 
         if (up != fraction.up) return false;
         return down == fraction.down;

@@ -1,4 +1,5 @@
 import com.free.pojo.Expression;
+import com.free.pojo.MyNumber;
 import org.junit.Test;
 
 /**
@@ -12,13 +13,11 @@ public class ExpressionTest {
 
     @Test
     public void print() {
-
         for (int i = 0; i < 10; i++) {
             Expression expression = new Expression(1, 10);
             System.out.println(expression);
             System.out.println(expression.getRoot().result);
-
-
         }
     }
+
 }

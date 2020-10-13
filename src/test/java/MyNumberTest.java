@@ -2,38 +2,22 @@ import com.free.pojo.MyNumber;
 import org.junit.Test;
 
 /**
- * @author lucifer
- */
+ * @ClassNameMyNumberTest
+ * @Description
+ * @Author Free
+ * @Date2020/10/9 22:54
+ * @Version V1.0
+ **/
 public class MyNumberTest {
-
-
     @Test
-    public void addTest(){
-        MyNumber left = new MyNumber(4,5);
-        MyNumber right = new MyNumber(6,5);
-        System.out.println(left.add(right));
+    public void MyNumber() {
+        String result = "1'21/22";
+        MyNumber fraction = new MyNumber(result);
+        System.out.println(fraction);
+        System.out.println(new MyNumber("2/6"));
+        System.out.println(new MyNumber("-2/6"));
+        System.out.println(new MyNumber("-6/6"));
+        System.out.println(new MyNumber("-6/3"));
+
     }
-
-    @Test
-    public void subtractTest(){
-        MyNumber left = new MyNumber(7,5);
-        MyNumber right = new MyNumber(6,5);
-        System.out.println(left.subtract(right));
-    }
-
-    @Test
-    public void multiplyTest(){
-        MyNumber left = new MyNumber(4,5);
-        MyNumber right = new MyNumber(6,5);
-        System.out.println(left.multiply(right));
-    }
-
-    @Test
-    public void divideTest(){
-        MyNumber left = new MyNumber(4,5);
-        MyNumber right = new MyNumber(6,5);
-        System.out.println(left.divide(right));
-    }
-
-
 }

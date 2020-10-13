@@ -121,11 +121,11 @@ public class MyNumber {
     */
     public static MyNumber generateMyNumber() {
         //a.b 都是大于等于0的
-        int up = Creator.getRandomInRange(Expression.range);
-        int down = Creator.getRandomInRange(Expression.range);
+        int up = Creator.getRandomInRange(Expression.numRange);
+        int down = Creator.getRandomInRange(Expression.numRange);
         //分母为0
         while (down == 0) {
-            down = Creator.getRandomInRange(Expression.range);
+            down = Creator.getRandomInRange(Expression.numRange);
         }
         MyNumber result = new MyNumber(up,down);
         return result;

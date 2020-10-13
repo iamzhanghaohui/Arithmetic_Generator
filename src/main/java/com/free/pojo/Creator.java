@@ -17,14 +17,14 @@ public class Creator {
     /**
      * 功能描述: <br>获得范围内的随机整数
      * 〈〉
-     * @Param: [range]
+     * @Param: [numRange]
      * @Return: int
      * @Author: Free
      * @Date: 2020/10/9 22:52
      */
-    public static int getRandomInRange(int range) {
+    public static int getRandomInRange(int numRange) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        return random.nextInt(range);
+        return random.nextInt(numRange);
     }
 
     /**

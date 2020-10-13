@@ -21,9 +21,9 @@ import java.util.Scanner;
 public class MainStart {
     public static void main(String[] args) throws IOException {
         //数字范围大小
-        int range=0;
+        int numRange=0;
         //题目数量
-        int number=0;
+        int testNum=0;
         //接收参数
         while (true) {
             Scanner sc = new Scanner(System.in);
@@ -40,10 +40,10 @@ public class MainStart {
         //获取参数
         for(int i=0;i<args.length;i++){
             if("-n".equals(args[i])){
-                number= Integer.parseInt(args[i+1]);
+                testNum= Integer.parseInt(args[i+1]);
                 i++;
             } else if ("-r".equals(args[i])) {
-                range= Integer.parseInt(args[i+1]);
+                numRange= Integer.parseInt(args[i+1]);
                 i++;
             }
             else {
@@ -52,7 +52,7 @@ public class MainStart {
         }
         //判断是否生成题目,如果不是生成题目，则是对照答案
         //Myapp.exe -e <exercisefile>.txt -a <answerfile>.txt
-        if(range==0&&number==0){
+        if(numRange==0&&testNum==0){
             String answerFileName;
             String execiseFileName;
             if ("-e".equals(args[0])){
@@ -68,7 +68,7 @@ public class MainStart {
         }
 
         else {
-            HashMap<String, String> map= Creator.generateMap(number,range);
+            HashMap<String, String> map= Creator.generateMap(testNum,numRange);
             File file=new File("Exercises.txt");
             File answerFile=new File("answerfile.txt");
             try {

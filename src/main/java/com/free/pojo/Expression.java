@@ -34,7 +34,7 @@ public class Expression {
     //出现n除以0的情况
     private boolean isDivideZero = false;
     //生成答案的范围
-    public static int range;
+    public static int numRange;
 
     /**
      * 功能描述: <br>生成表达式
@@ -50,7 +50,7 @@ public class Expression {
         if (answerRange < 1) {
             throw new RuntimeException("运算结果范围必须大于等于1");
         }
-        range = answerRange;
+        numRange = answerRange;
 
         if (operatorNum == 1) {
             root = generateNode(operatorNum);
@@ -61,28 +61,28 @@ public class Expression {
     /**
      * 功能描述: <br>构建生成四则运算表达式的二叉树
      * 〈〉
-     * @Param: [number] 运算符的个数
+     * @Param: [testNum] 运算符的个数
      * @Return: com.free.pojo.Node 二叉树的头节点
      * @Author: Free
      * @Date: 2020/10/9 21:34
      */
-    public Node generateNode(int number) {
+    public Node generateNode(int testNum) {
         //如果是0就构造叶子节点
-        if (number == 0) {
+        if (testNum == 0) {
             return new Node(MyNumber.generateMyNumber(), null, null, 1);
         }
         //其他都是构造符号节点
         //随机选一种运算符号
         Onode parent = new Onode(null, null, OPERATORS[Creator.getRandomInRange(4)]);
-        int left = Creator.getRandomInRange(number);
+        int left = Creator.getRandomInRange(testNum);
         //递归下去构造左孩子和右孩子
         parent.left = generateNode(left);
         //总数要减去当前已经构建出来的这一个节点
-        parent.right = generateNode(number - 1 - left);
+        parent.right = generateNode(testNum - 1 - left);
 
         //然后计算结果
         MyNumber result = calculate(parent.operator, parent.left.result, parent.right.result);
-        //如果是负数,就是出现小的减去大的情况，这时候交换左右孩子
+        //如果是负数 这时候交换左右孩子
         if (result.isNegative()) {
             Node tmp = parent.left;
             parent.left = parent.right;

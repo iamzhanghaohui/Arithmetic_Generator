@@ -13,8 +13,8 @@ public class ExpressionTest {
 
     @Test
     public void print() {
-        for (int i = 0; i < 10; i++) {
-            Expression expression = new Expression(1, 10);
+        for (int i = 0; i < 10000; i++) {
+            Expression expression = new Expression(3, 10);
             System.out.println(expression);
             System.out.println(expression.getRoot().result);
         }
